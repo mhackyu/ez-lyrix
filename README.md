@@ -8,4 +8,4 @@
 
 ### Author ###
 
-* [ mhackyu ](http://mc-paderes.com/)
+* Made with ♥ [ mhackyu ](http://mc-paderes.com/)
