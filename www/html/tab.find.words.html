@@ -1,0 +1,57 @@
+<ons-page ng-controller="FindWordsCtrl as fwords" ons-show="app.title = 'Lyrics Pad'">
+    <ons-list>
+        <ons-list-header>Search for..</ons-list-header>
+        <ons-list-item>
+            <ons-select ng-model="fwords.selectedModifier" id="choose-sel" ng-change="fwords.editSelects()">
+                <option value="rhyme">Rhyme</option>
+                <option value="synonyms">Synonyms</option>
+                <option value="antonyms">Antonyms</option>
+            </ons-select>
+        </ons-list-item>
+        <!--<ons-list-item><strong>{{ fwords.selectedModifier }}</strong> {{ fwords.description }}</ons-list-item>-->
+        <form ng-submit="fwords.search()">
+            <ons-search-input input-id="search-word" ng-model="fwords.query" placeholder="Type a word" style="width: 1000%;"></ons-search-input>
+        </form>
+    </ons-list>
+
+    <!--<ons-list modifier="inset">-->
+        <!--<ons-list-header>noun</ons-list-header>-->
+        <!--<ons-list-item modifier="longdivider">beautiful</ons-list-item>-->
+        <!--<ons-list-item modifier="longdivider"></ons-list-item>-->
+    <!--</ons-list>-->
+
+    <!-- RESULTS -->
+    <!--<ons-button modifier="quiet"><ons-icon icon="fa-copy" ng-click="fwords.copy('result.word')"></ons-icon></ons-button>-->
+    <ons-list ng-show="hasResults">
+        <ons-list-header style="text-align: center"><strong>Tap on the list item copy</strong></ons-list-header>
+        <ons-list-item>
+            <div class="left">
+                <strong>word</strong>
+            </div>
+            <div class="right">
+                <strong>popularity</strong>
+            </div>
+        </ons-list-item>
+        <ons-list-item ng-repeat="result in results">
+            <div class="left">
+                {{ result.word }}
+            </div>
+            <div class="right">
+                {{ result.score }}
+                <!--<ons-button modifier="quiet"><ons-icon icon="fa-copy" ng-click="copy(result.word)"></ons-icon></ons-button>-->
+            </div>
+        </ons-list-item>
+    </ons-list>
+
+    <!--<ons-list ng-hide="hasResults">-->
+        <!--<ons-list-header style="text-align: center"><strong>No results found</strong></ons-list-header>-->
+    <!--</ons-list>-->
+
+    <ons-modal var="loadingModal" direction="up">
+        <div style="text-align: center">
+            <!--<ons-icon icon="fa-spinner" size="26px" spin></ons-icon>-->
+            <ons-progress-circular indeterminate></ons-progress-circular>
+            <p>Please wait..</p>
+        </div>
+    </ons-modal>
+</ons-page>

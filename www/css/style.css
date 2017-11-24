@@ -1,0 +1,36 @@
+/**/
+
+#save-lyrics {
+    /*background-color: #008975;*/
+    background-color: #00BF9A;
+}
+
+#back-to-list {
+    color: #1f1f21;
+}
+
+#lyrics {
+    font-family: 'Karla', sans-serif;
+    height: 70%;
+    width: 100%;
+    padding: 10px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+#lyrics-title {
+    font-family: 'Rock Salt', cursive;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+
+#lyrics-author {
+    margin-top: 0;
+    padding: 0;
+    font-size: 14px;
+}
