@@ -18,7 +18,11 @@
                 {{ data.title }}
             </div>
             <div class="right">
-                <ons-button modifier="quiet" ng-click="home.delete($event, data)"><ons-icon icon="fa-trash"></ons-icon></ons-button>
+                <ons-button modifier="quiet" ng-click="home.delete($event, data)">
+                    <!--<div ng-if="home.">-->
+                        <ons-icon icon="fa-trash"></ons-icon>
+                    <!--</div>-->
+                </ons-button>
             </div>
         </ons-list-item>
     </ons-list>

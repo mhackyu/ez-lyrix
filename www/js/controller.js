@@ -71,10 +71,6 @@ app.controller('HomeCtrl', function($scope) {
         }
     ];
 
-    this.showLyrics = function(data) {
-        console.log(data.title);
-    };
-
 
     this.delete = function($event, data) {
         $event.stopPropagation();
@@ -171,33 +167,28 @@ app.controller('FindWordsCtrl', function($http, $scope) {
 
 app.controller('LyricsPadCtrl', function($scope) {
 
+    $scope.isRemindedToSave = false;
     var page = appNavigator.topPage.data;
 
     if (page.isNew) {
-        console.log("isNEw");
-        this.title = "Untitled";
-        this.body = "";
+        $scope.title = "Untitled";
+        $scope.body = "";
     }
     else {
-        this.title = page.data.title;
-        this.body = page.data.lyrics;
+        $scope.title = page.data.title;
+        $scope.body = page.data.lyrics;
     }
 
-    // this.title = "#Hugot";
-    // this.author = "Ches, Kim, and Mark";
-    // this.body = "I.\rSabi nila sa akin, ang love ay parang traffic \rMinsan nakakainip, madalas nakakabadtrip \r" +
-    //     "Ang hanap ng damdamin, kapeng nakakahyper \r" +
-    //     "Haluan mo ng tamis para hindi na bitter \r" +
-    //     "Ang love ay MRT, o huwag mo nang pilitin \r" +
-    //     "Handa ka bang masaktan, maipit ang sarili \r" +
-    //     "Sabi nila sa akin, lahat daw ng bilihin \r" +
-    //     "Pati ang gasolina ay nagmamahal na rin \r" +
-    //     "[Refrain:] \r" +
-    //     "Saan nga ba napulot, bakit ang lakas humugot \r" +
-    //     "Hashtag (#) sa pag-ibig, ‘wag na ‘wag kang matatakot \r" +
-    //     "[Chorus :] \rIba’t-iba man ang kahulugan \r" +
-    //     "Iisa pa rin ang patutunguhan Buti na lang may pinaghuhugutan \r" +
-    //     "Hashtag (#) hugot tayo, kaibigan \r";
+    $scope.remindToSave = function() {
+        if ($scope.body.length > 30 && !$scope.isRemindedToSave) {
+            ons.notification.toast({
+                message: "Don't forget to save",
+                buttonLabel: "OK",
+                animation: "fall"
+            });
+            $scope.isRemindedToSave = true;
+        }
+    };
 
     $scope.saveLyrics = function() {
         // document.querySelector('ons-toast').toggle();
