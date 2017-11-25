@@ -9,10 +9,20 @@
             Home
         </div>
     </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-        Swipe right to open the menu!
-        <ons-fab position="bottom right" ng-click="home.pushPage({'id': 'html/lyrics.html'}, 'lift-ios')">
-            <ons-icon icon="fa-pencil"></ons-icon>
-        </ons-fab>
-    </p>
+    <!--<p style="text-align: center; opacity: 0.6; padding-top: 20px;">-->
+        <!--Tap the floating buttom to create-->
+    <!--</p>-->
+    <ons-list ng-repeat="data in tempData track by $index">
+        <ons-list-item tappable ng-click="home.pushPage({'id': 'html/lyrics.html', 'data': data, 'isNew': false}, 'lift-ios')">
+            <div class="left">
+                {{ data.title }}
+            </div>
+            <div class="right">
+                <ons-button modifier="quiet" ng-click="home.delete($event, data)"><ons-icon icon="fa-trash"></ons-icon></ons-button>
+            </div>
+        </ons-list-item>
+    </ons-list>
+    <ons-fab position="top right" ng-click="home.pushPage({'id': 'html/lyrics.html', 'isNew': true}, 'lift-ios')">
+        <ons-icon icon="fa-pencil"></ons-icon>
+    </ons-fab>
 </ons-page>

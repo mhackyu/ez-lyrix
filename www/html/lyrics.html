@@ -4,6 +4,12 @@
             <ons-back-button>Home</ons-back-button>
         </div>
         <div class="center">{{app.title}} {{ app.age }}</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="saveLyrics()">
+                <ons-icon icon="fa-save"></ons-icon>
+                <!--Save-->
+            </ons-toolbar-button>
+        </div>
     </ons-toolbar>
 
     <ons-tabbar position="auto" swipeable>

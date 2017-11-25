@@ -1,9 +1,10 @@
 <ons-page ng-controller="LyricsPadCtrl as lyrics" ons-show="app.title = 'Lyrics Pad'">
     <div class="content" style="text-align: center">
         <p id="lyrics-title">{{ lyrics.title }}</p>
-        <p id="lyrics-author">by {{ lyrics.author }}</p>
+        <p>{{  }}</p>
+        <!--<p id="lyrics-author">by {{ lyrics.author }}</p>-->
         <!--<button class="button&#45;&#45;quiet"><ons-icon icon="fa-edit"></ons-icon></button>-->
         <textarea id="lyrics" class="textarea textarea--transparent" placeholder="Type your lyrics here">{{ lyrics.body }}</textarea>
-        <button id="save-lyrics" class="button--large--cta" style="width: 95%; margin: 0 auto;" ng-click="saveLyrics()">Save</button>
+        <!--<button id="save-lyrics" class="button&#45;&#45;large&#45;&#45;cta" style="width: 95%; margin: 0 auto;" ng-click="saveLyrics()">Save</button>-->
     </div>
 </ons-page>
