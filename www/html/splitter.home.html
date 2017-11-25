@@ -1,0 +1,18 @@
+<ons-page ng-controller="HomeCtrl as home">
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button ng-click="mySplitter.left.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">
+            Home
+        </div>
+    </ons-toolbar>
+    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+        Swipe right to open the menu!
+        <ons-fab position="bottom right" ng-click="home.pushPage({'id': 'html/lyrics.html'}, 'lift-ios')">
+            <ons-icon icon="fa-pencil"></ons-icon>
+        </ons-fab>
+    </p>
+</ons-page>

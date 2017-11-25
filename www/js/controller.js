@@ -2,6 +2,31 @@ app.controller('AppController', function() {
 
 });
 
+app.controller('SplitterController', function() {
+    this.load = function (page) {
+        mySplitter.content.load(page)
+            .then(function () {
+                mySplitter.left.close();
+            });
+    };
+
+    this.loadView = function (url) {
+        window.open(url, '_blank');
+    };
+
+});
+
+app.controller('HomeCtrl', function() {
+    this.pushPage = function(page, anim) {
+        if (anim) {
+            appNavigator.pushPage(page.id, { data: { title: page.title }, animation: anim });
+        }
+        else {
+            appNavigator.pushPage(page.id);
+        }
+    };
+});
+
 /* FIND WORDS CONTROLLER */
 app.controller('FindWordsCtrl', function($http, $scope) {
     this.selectedModifier = 'rhyme';

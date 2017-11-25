@@ -1,0 +1,40 @@
+<ons-page>
+    <ons-splitter var="mySplitter" ng-controller="SplitterController as splitter">
+        <ons-splitter-side side="left" width="220px" collapse swipeable>
+            <ons-page>
+
+                <!-- ACCESS -->
+                <ons-list-title>Access</ons-list-title>
+                <ons-list>
+                    <ons-list-item ng-click="splitter.load('html/splitter.home.html')" tappable>
+                        <div class="left">
+                            <ons-icon icon="fa-home"></ons-icon>
+                        </div>
+                        Home
+                    </ons-list-item>
+                    <ons-list-item ng-click="splitter.load('html/spiltter.about.html')" tappable>
+                        <div class="left">
+                            <ons-icon icon="fa-exclamation-circle"></ons-icon>
+                        </div>
+                        About
+                    </ons-list-item>
+                </ons-list>
+
+                <!-- DEVELOPER INFO -->
+                <ons-list-title>Developer</ons-list-title>
+                <ons-list-item ng-click="splitter.loadView('http://mc-paderes.com')">
+                    <div class="left"><ons-icon icon="md-globe-alt"></ons-icon></div>
+                    Website
+                    <div class="right"><ons-icon icon="fa-external-link"></ons-icon></div>
+                </ons-list-item>
+                <ons-list-item ng-click="splitter.loadView('https://github.com/mhackyu')">
+                    <div class="left"><ons-icon icon="md-github"></ons-icon></div>
+                    Github
+                    <div class="right"><ons-icon icon="fa-external-link"></ons-icon></div>
+                </ons-list-item>
+
+            </ons-page>
+        </ons-splitter-side>
+        <ons-splitter-content page="html/splitter.home.html"></ons-splitter-content>
+    </ons-splitter>
+</ons-page>

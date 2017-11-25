@@ -16,43 +16,10 @@
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link href="https://fonts.googleapis.com/css?family=Karla:400i|Rock+Salt" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <script>
-//      ons.bootstrap()
-//          .controller('AppController', function() {
-//          });
-//      ons.ready(function() {
-//          console.log("Onsen UI is ready!");
-//      });
-  </script>
 </head>
 <body>
-<ons-page ng-controller="AppController as app">
-  <ons-toolbar>
-    <div class="center">ezLyrix - {{app.title}} {{ app.age }}</div>
-  </ons-toolbar>
 
-  <ons-tabbar position="auto" swipeable>
-    <ons-tab page="html/tab.lyrics.pad.html" label="Lyics Pad" icon="fa-file-o" active-icon="fa-file" active></ons-tab>
-    <ons-tab id="tab-find-words" page="html/tab.find.words.html" label="Find Words" icon="fa-search" ></ons-tab>
-  </ons-tabbar>
-</ons-page>
-
-<!--<ons-template id="page1.html">-->
-  <!--<ons-page ng-controller="SampleCtrl as sample" ons-show="app.title = 'Lyrics Pad'">-->
-    <!--<div class="content" style="text-align: center">-->
-      <!--<p>Page 1 content {{sample.name}}</p>-->
-    <!--</div>-->
-  <!--</ons-page>-->
-<!--</ons-template>-->
-
-<!--<ons-template id="page2.html">-->
-  <!--<ons-page ons-show="app.title = 'Find Words'">-->
-    <!--<div class="content" style="text-align: center">-->
-      <!--<p>Page 2 content</p>-->
-    <!--</div>-->
-  <!--</ons-page>-->
-<!--</ons-template>-->
+<ons-navigator swipeable var="appNavigator" page="html/main.html"></ons-navigator>
 
 </body>
 </html>
