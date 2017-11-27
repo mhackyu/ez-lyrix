@@ -1,10 +1,8 @@
 <ons-page ng-controller="LyricsPadCtrl as lyrics" ons-show="app.title = 'Lyrics Pad'">
     <div class="content" style="text-align: center">
-        <p id="lyrics-title">{{ title }}</p>
-        <!--<p>{{  }}</p>-->
-        <!--<p id="lyrics-author">by {{ lyrics.author }}</p>-->
-        <!--<button class="button&#45;&#45;quiet"><ons-icon icon="fa-edit"></ons-icon></button>-->
+        <!--<p id="lyrics-title">{{ title }}</p>-->
+        <ons-input float placeholder="Title" id="input-lyrics-title" ng-model="title"></ons-input>
+
         <textarea ng-change="remindToSave()" ng-model="body" id="lyrics" class="textarea textarea--transparent" placeholder="Type your lyrics here">{{ lyrics.body }}</textarea>
-        <!--<button id="save-lyrics" class="button&#45;&#45;large&#45;&#45;cta" style="width: 95%; margin: 0 auto;" ng-click="saveLyrics()">Save</button>-->
     </div>
 </ons-page>

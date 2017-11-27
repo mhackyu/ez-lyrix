@@ -16,61 +16,11 @@ app.controller('SplitterController', function() {
 
 });
 
-app.controller('HomeCtrl', function($scope) {
-    // Dummy data
-    $scope.tempData = [
-        {
-            id: 1,
-            title: "Shape Of You",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 2,
-            title: "Galway Girl",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 3,
-            title: "How Would You Feel",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 4,
-            title: "Perfect",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 5,
-            title: "Give Me Love",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 6,
-            title: "Thinking Out Loud",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 7,
-            title: "Photograph",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 8,
-            title: "Happier",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 9,
-            title: "Castle On The Hill",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        },
-        {
-            id: 10,
-            title: "Lego House",
-            lyrics: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur illo, illum iure magni nisi nostrum? A alias aliquid commodi corporis cumque cupiditate delectus doloribus dolorum earum eos excepturi illo inventore ipsa odit, officia pariatur perspiciatis provident saepe similique tempore tenetur veniam voluptatem, voluptatum. Ab dolor excepturi nobis quas quibusdam."
-        }
-    ];
+app.controller('HomeCtrl', function($scope, SongService) {
 
+    $scope.songs = SongService.songList();
+
+    // console.log($scope.songs);
 
     this.delete = function($event, data) {
         $event.stopPropagation();
@@ -79,24 +29,22 @@ app.controller('HomeCtrl', function($scope) {
             callback: function(isOk) {
                 if (isOk) {
                     console.log(data.title + " is deleted.");
-
                 }
             }
         });
     };
 
-    // function add(data) {
-    //     $scope.tempData.push(data);
-    // }
-
     this.pushPage = function(page, anim) {
-        // console.log(page.isNew);
-        if (anim) {
-            appNavigator.pushPage(page.id, { data: { data: page.data, isNew: page.isNew }, animation: anim });
-        }
-        else {
-            appNavigator.pushPage(page.id, { data: { data: page.data, isNew: page.isNew }});
-        }
+        // if (anim) {
+        appNavigator.pushPage(page.id, { data: { data: page.data, isNew: page.isNew }, animation: anim });
+        // }
+        // else {
+        //     appNavigator.pushPage(page.id, { data: { data: page.data, isNew: page.isNew }});
+        // }
+    };
+
+    $scope.updateList = function() {
+        $scope.songs = SongService.songList();
     };
 });
 
@@ -124,6 +72,7 @@ app.controller('FindWordsCtrl', function($http, $scope) {
             }
         })
             .then(function (response){
+                loadingModal.hide();
                 if (response.data.length === 0) {
                     ons.notification.alert({
                         message: "No results found!",
@@ -142,7 +91,6 @@ app.controller('FindWordsCtrl', function($http, $scope) {
                         document.getElementById('tab-find-words').setAttribute('badge', $scope.results.length);
                     }
                 }
-                loadingModal.hide();
             }, function (error) {
                 console.log(error);
                 loadingModal.hide();
@@ -164,14 +112,14 @@ app.controller('FindWordsCtrl', function($http, $scope) {
 
 });
 
-
-app.controller('LyricsPadCtrl', function($scope) {
+app.controller('LyricsPadCtrl', function($scope, SongService) {
 
     $scope.isRemindedToSave = false;
     var page = appNavigator.topPage.data;
+    var id = SongService.getGeneratedId();
 
     if (page.isNew) {
-        $scope.title = "Untitled";
+        $scope.title = "";
         $scope.body = "";
     }
     else {
@@ -188,6 +136,11 @@ app.controller('LyricsPadCtrl', function($scope) {
             });
             $scope.isRemindedToSave = true;
         }
+
+        if (page.isNew) {
+            SongService.setSong(id, this.title, this.body);
+        }
+
     };
 
     $scope.saveLyrics = function() {
@@ -200,3 +153,19 @@ app.controller('LyricsPadCtrl', function($scope) {
       });
     };
 });
+
+app.controller('LyricsCtrl', function($scope, SongService) {
+    $scope.saveLyrics = function() {
+        SongService.save();
+        // console.log(SongService.getSong()[0]);
+        // console.log(SongService.getListOfSongs());
+        // document.querySelector('ons-toast').toggle();
+        ons.notification.toast({
+            message: "Saved",
+            buttonLabel: "OK",
+            timeout: 3000,
+            animation: "fall"
+        });
+    };
+});
+
