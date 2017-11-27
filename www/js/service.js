@@ -3,8 +3,13 @@ app.service('SongService', function(localStorageService) {
     this.title = "";
     this.lyrics = "";
 
-    // This will hold updated list of the song temporaryly;
+    // This will hold updated list of the song temporarily.
     this.tempSongs = [];
+    // This the current on editor.
+    this.currentSongId  = "";
+    this.titleUpdate = "";
+    this.lyricsUpdate = "";
+    this.toUpdate = false;
 
     // this.songs =  [
     //     {
@@ -90,6 +95,29 @@ app.service('SongService', function(localStorageService) {
         else {
             this.pushNewSong();
         }
+    };
+
+    this.update = function() {
+        var tempSongList = this.songList();
+        for (var i = 0; i < this.songList().length; i++) {
+            if (this.currentSongId === this.songList()[i].id) {
+                tempSongList[i].title = this.titleUpdate;
+                tempSongList[i].lyrics = this.lyricsUpdate;
+                break;
+            }
+        }
+        localStorageService.set("songList", tempSongList);
+    };
+
+    this.remove = function(id) {
+        var tempSongList = this.songList();
+        var index = tempSongList.map(function(x) {
+            return x.id;
+        }).indexOf(id);
+
+        tempSongList.splice(index, 1);
+        localStorageService.set("songList", tempSongList);
+        // console.log(tempSongList);
     };
 
     this.songList = function() {

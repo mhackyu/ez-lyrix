@@ -28,7 +28,11 @@ app.controller('HomeCtrl', function($scope, SongService) {
             message: "Are you sure you want to delete '" + data.title + "' ?",
             callback: function(isOk) {
                 if (isOk) {
-                    console.log(data.title + " is deleted.");
+                    console.log(SongService.songList());
+                    // SongService.remove(data.id);
+                    // console.log(SongService.songList());
+                    // $scope.updateList();
+                    // $scope.songs = SongService.songList();
                 }
             }
         });
@@ -46,6 +50,7 @@ app.controller('HomeCtrl', function($scope, SongService) {
     $scope.updateList = function() {
         $scope.songs = SongService.songList();
     };
+
 });
 
 /* FIND WORDS CONTROLLER */
@@ -114,20 +119,26 @@ app.controller('FindWordsCtrl', function($http, $scope) {
 
 app.controller('LyricsPadCtrl', function($scope, SongService) {
 
+
     $scope.isRemindedToSave = false;
     var page = appNavigator.topPage.data;
     var id = SongService.getGeneratedId();
+    document.getElementById("btnSave").disabled = true;
+    SongService.toUpdate = false;
 
     if (page.isNew) {
         $scope.title = "";
         $scope.body = "";
     }
     else {
+        $scope.id = page.data.id;
         $scope.title = page.data.title;
         $scope.body = page.data.lyrics;
+        SongService.currentSongId = $scope.id;
     }
 
     $scope.remindToSave = function() {
+        // console.log($scope.id);
         if ($scope.body.length > 30 && !$scope.isRemindedToSave) {
             ons.notification.toast({
                 message: "Don't forget to save",
@@ -137,29 +148,49 @@ app.controller('LyricsPadCtrl', function($scope, SongService) {
             $scope.isRemindedToSave = true;
         }
 
+        $scope.enableAndDisableSave();
+        $scope.saveAndUpdateSong();
+
+
+    };
+
+    $scope.titleOnChange = function() {
+        $scope.enableAndDisableSave();
+        $scope.saveAndUpdateSong();
+        // SongService.updateSong(id);
+    };
+
+    $scope.enableAndDisableSave = function() {
+        if ($scope.title.length === 0 || $scope.body.length === 0) {
+            document.getElementById("btnSave").disabled = true;
+        }
+        else {
+            document.getElementById("btnSave").disabled = false;
+        }
+    };
+
+    $scope.saveAndUpdateSong = function() {
         if (page.isNew) {
             SongService.setSong(id, this.title, this.body);
         }
-
+        else {
+            SongService.titleUpdate = this.title;
+            SongService.lyricsUpdate = this.body;
+            SongService.toUpdate = true;
+        }
     };
 
-    $scope.saveLyrics = function() {
-        // document.querySelector('ons-toast').toggle();
-      ons.notification.toast({
-          message: "Saved",
-          buttonLabel: "OK",
-          timeout: 3000,
-          animation: "fall"
-      });
-    };
 });
 
 app.controller('LyricsCtrl', function($scope, SongService) {
     $scope.saveLyrics = function() {
-        SongService.save();
-        // console.log(SongService.getSong()[0]);
-        // console.log(SongService.getListOfSongs());
-        // document.querySelector('ons-toast').toggle();
+        if (SongService.toUpdate) {
+            SongService.update();
+        }
+        else {
+            SongService.save();
+        }
+
         ons.notification.toast({
             message: "Saved",
             buttonLabel: "OK",

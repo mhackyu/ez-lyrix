@@ -1,7 +1,7 @@
 <ons-page ng-controller="LyricsPadCtrl as lyrics" ons-show="app.title = 'Lyrics Pad'">
     <div class="content" style="text-align: center">
         <!--<p id="lyrics-title">{{ title }}</p>-->
-        <ons-input float placeholder="Title" id="input-lyrics-title" ng-model="title"></ons-input>
+        <ons-input ng-change="titleOnChange()" float placeholder="Title" id="input-lyrics-title" ng-model="title"></ons-input>
 
         <textarea ng-change="remindToSave()" ng-model="body" id="lyrics" class="textarea textarea--transparent" placeholder="Type your lyrics here">{{ lyrics.body }}</textarea>
     </div>
